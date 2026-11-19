@@ -552,7 +552,7 @@ spawnCat(
   85,
   "#a6e3a1",
   "#82c27d",
-  0.8
+  0
 );
 
 spawnCat(
