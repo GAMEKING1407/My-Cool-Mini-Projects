@@ -1,44 +1,101 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
+    'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background: #f5f3eb;
+  color: #292719;
+}
+
 .unicode-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  padding: 25px;
+}
+
+.unicode-category {
+  margin-top: 35px;
+}
+
+.unicode-category h2 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.unicode-category p {
+  color: #77715b;
+  margin-bottom: 20px;
 }
 
 .unicode-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 25px;
 }
 
 .unicode-character {
+  position: relative;
+  background: linear-gradient(135deg, #fff36b, #ffeb55);
+  color: #38351d;
+  border: none;
+  border-radius: 1px;
+  min-height: 145px;
+  padding: 14px;
+  box-shadow: 3px 5px 9px #0002;
+  transform: rotate(-2deg);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 15px 8px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: white;
-  cursor: pointer;
+  justify-content: center;
+  gap: 7px;
 }
 
-.unicode-symbol {
-  font-size: 32px;
+.unicode-character:nth-child(even) {
+  transform: rotate(2deg);
 }
 
-.unicode-name {
-  font-size: 12px;
+.unicode-character:nth-child(3n) {
+  transform: rotate(-1deg);
 }
 
-.unicode-code {
-  font-size: 10px;
-  color: #888;
+.unicode-character::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 18px 18px;
+  border-color: transparent transparent #d6c64b transparent;
 }
 
 .unicode-character:hover {
-  background: #f0f0f0;
+  transform: rotate(0deg) scale(1.08);
+  box-shadow: 5px 9px 16px #0003;
+  z-index: 2;
+}
+
+.unicode-symbol {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.unicode-name {
+  font-size: 0.85rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.unicode-code {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  font-family: monospace;
 }
 
 .unicode-character.copied {
-  border-color: #4caf50;
+  transform: rotate(0deg) scale(1.05);
 }
