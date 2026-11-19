@@ -1,0 +1,184 @@
+{
+  "categories": [
+    {
+      "id": "arrows",
+      "name": "Arrows",
+      "description": "Directional symbols and arrows.",
+      "characters": [
+        { "char": "←", "name": "Left Arrow", "code": "U+2190" },
+        { "char": "↑", "name": "Up Arrow", "code": "U+2191" },
+        { "char": "→", "name": "Right Arrow", "code": "U+2192" },
+        { "char": "↓", "name": "Down Arrow", "code": "U+2193" },
+        { "char": "↔", "name": "Left Right Arrow", "code": "U+2194" },
+        { "char": "↕", "name": "Up Down Arrow", "code": "U+2195" },
+        { "char": "⇐", "name": "Left Double Arrow", "code": "U+21D0" },
+        { "char": "⇒", "name": "Right Double Arrow", "code": "U+21D2" },
+        { "char": "⇑", "name": "Up Double Arrow", "code": "U+21D1" },
+        { "char": "⇓", "name": "Down Double Arrow", "code": "U+21D3" }
+      ]
+    },
+    {
+      "id": "mathematics",
+      "name": "Mathematics",
+      "description": "Mathematical operators and symbols.",
+      "characters": [
+        { "char": "∞", "name": "Infinity", "code": "U+221E" },
+        { "char": "√", "name": "Square Root", "code": "U+221A" },
+        { "char": "∑", "name": "Summation", "code": "U+2211" },
+        { "char": "∏", "name": "Product", "code": "U+220F" },
+        { "char": "∫", "name": "Integral", "code": "U+222B" },
+        { "char": "≈", "name": "Almost Equal", "code": "U+2248" },
+        { "char": "≠", "name": "Not Equal", "code": "U+2260" },
+        { "char": "≤", "name": "Less Than or Equal", "code": "U+2264" },
+        { "char": "≥", "name": "Greater Than or Equal", "code": "U+2265" },
+        { "char": "∂", "name": "Partial Differential", "code": "U+2202" },
+        { "char": "∇", "name": "Nabla", "code": "U+2207" },
+        { "char": "∈", "name": "Element Of", "code": "U+2208" },
+        { "char": "∅", "name": "Empty Set", "code": "U+2205" },
+        { "char": "∀", "name": "For All", "code": "U+2200" },
+        { "char": "∃", "name": "There Exists", "code": "U+2203" }
+      ]
+    },
+    {
+      "id": "shapes",
+      "name": "Geometric Shapes",
+      "description": "Geometric shapes and decorative symbols.",
+      "characters": [
+        { "char": "○", "name": "White Circle", "code": "U+25CB" },
+        { "char": "●", "name": "Black Circle", "code": "U+25CF" },
+        { "char": "□", "name": "White Square", "code": "U+25A1" },
+        { "char": "■", "name": "Black Square", "code": "U+25A0" },
+        { "char": "△", "name": "White Triangle", "code": "U+25B3" },
+        { "char": "▲", "name": "Black Triangle", "code": "U+25B2" },
+        { "char": "◇", "name": "White Diamond", "code": "U+25C7" },
+        { "char": "◆", "name": "Black Diamond", "code": "U+25C6" },
+        { "char": "☆", "name": "White Star", "code": "U+2606" },
+        { "char": "★", "name": "Black Star", "code": "U+2605" }
+      ]
+    },
+    {
+      "id": "currency",
+      "name": "Currency",
+      "description": "International currency symbols.",
+      "characters": [
+        { "char": "$", "name": "Dollar Sign", "code": "U+0024" },
+        { "char": "€", "name": "Euro Sign", "code": "U+20AC" },
+        { "char": "£", "name": "Pound Sign", "code": "U+00A3" },
+        { "char": "¥", "name": "Yen Sign", "code": "U+00A5" },
+        { "char": "₹", "name": "Indian Rupee Sign", "code": "U+20B9" },
+        { "char": "₩", "name": "Won Sign", "code": "U+20A9" },
+        { "char": "₽", "name": "Ruble Sign", "code": "U+20BD" },
+        { "char": "₿", "name": "Bitcoin Sign", "code": "U+20BF" }
+      ]
+    },
+    {
+      "id": "greek",
+      "name": "Greek Letters",
+      "description": "Greek alphabet characters used in mathematics and science.",
+      "characters": [
+        { "char": "α", "name": "Alpha", "code": "U+03B1" },
+        { "char": "β", "name": "Beta", "code": "U+03B2" },
+        { "char": "γ", "name": "Gamma", "code": "U+03B3" },
+        { "char": "δ", "name": "Delta", "code": "U+03B4" },
+        { "char": "ε", "name": "Epsilon", "code": "U+03B5" },
+        { "char": "θ", "name": "Theta", "code": "U+03B8" },
+        { "char": "λ", "name": "Lambda", "code": "U+03BB" },
+        { "char": "π", "name": "Pi", "code": "U+03C0" },
+        { "char": "σ", "name": "Sigma", "code": "U+03C3" },
+        { "char": "Ω", "name": "Omega", "code": "U+03A9" }
+      ]
+    },
+    {
+      "id": "punctuation",
+      "name": "Punctuation",
+      "description": "Special punctuation and typographic characters.",
+      "characters": [
+        { "char": "—", "name": "Em Dash", "code": "U+2014" },
+        { "char": "–", "name": "En Dash", "code": "U+2013" },
+        { "char": "…", "name": "Horizontal Ellipsis", "code": "U+2026" },
+        { "char": "•", "name": "Bullet", "code": "U+2022" },
+        { "char": "§", "name": "Section Sign", "code": "U+00A7" },
+        { "char": "¶", "name": "Pilcrow", "code": "U+00B6" },
+        { "char": "†", "name": "Dagger", "code": "U+2020" },
+        { "char": "‡", "name": "Double Dagger", "code": "U+2021" },
+        { "char": "※", "name": "Reference Mark", "code": "U+203B" }
+      ]
+    },
+    {
+      "id": "music",
+      "name": "Music",
+      "description": "Musical notation symbols.",
+      "characters": [
+        { "char": "♩", "name": "Quarter Note", "code": "U+2669" },
+        { "char": "♪", "name": "Eighth Note", "code": "U+266A" },
+        { "char": "♫", "name": "Beamed Eighth Notes", "code": "U+266B" },
+        { "char": "♬", "name": "Beamed Sixteenth Notes", "code": "U+266C" },
+        { "char": "♭", "name": "Flat", "code": "U+266D" },
+        { "char": "♮", "name": "Natural", "code": "U+266E" },
+        { "char": "♯", "name": "Sharp", "code": "U+266F" }
+      ]
+    },
+    {
+      "id": "weather",
+      "name": "Weather",
+      "description": "Weather and astronomical symbols.",
+      "characters": [
+        { "char": "☀", "name": "Sun", "code": "U+2600" },
+        { "char": "☁", "name": "Cloud", "code": "U+2601" },
+        { "char": "☂", "name": "Umbrella", "code": "U+2602" },
+        { "char": "☃", "name": "Snowman", "code": "U+2603" },
+        { "char": "☄", "name": "Comet", "code": "U+2604" },
+        { "char": "☾", "name": "Last Quarter Moon", "code": "U+263E" },
+        { "char": "☽", "name": "First Quarter Moon", "code": "U+263D" }
+      ]
+    },
+    {
+      "id": "chess",
+      "name": "Chess",
+      "description": "Chess pieces in Unicode.",
+      "characters": [
+        { "char": "♔", "name": "White King", "code": "U+2654" },
+        { "char": "♕", "name": "White Queen", "code": "U+2655" },
+        { "char": "♖", "name": "White Rook", "code": "U+2656" },
+        { "char": "♗", "name": "White Bishop", "code": "U+2657" },
+        { "char": "♘", "name": "White Knight", "code": "U+2658" },
+        { "char": "♙", "name": "White Pawn", "code": "U+2659" },
+        { "char": "♚", "name": "Black King", "code": "U+265A" },
+        { "char": "♛", "name": "Black Queen", "code": "U+265B" },
+        { "char": "♜", "name": "Black Rook", "code": "U+265C" },
+        { "char": "♝", "name": "Black Bishop", "code": "U+265D" },
+        { "char": "♞", "name": "Black Knight", "code": "U+265E" },
+        { "char": "♟", "name": "Black Pawn", "code": "U+265F" }
+      ]
+    },
+    {
+      "id": "cards",
+      "name": "Card Suits",
+      "description": "Playing card suit symbols.",
+      "characters": [
+        { "char": "♠", "name": "Spade", "code": "U+2660" },
+        { "char": "♡", "name": "White Heart Suit", "code": "U+2661" },
+        { "char": "♢", "name": "White Diamond Suit", "code": "U+2662" },
+        { "char": "♣", "name": "Club", "code": "U+2663" },
+        { "char": "♥", "name": "Black Heart Suit", "code": "U+2665" },
+        { "char": "♦", "name": "Black Diamond Suit", "code": "U+2666" }
+      ]
+    },
+    {
+      "id": "fractions",
+      "name": "Fractions",
+      "description": "Common fraction characters.",
+      "characters": [
+        { "char": "¼", "name": "One Quarter", "code": "U+00BC" },
+        { "char": "½", "name": "One Half", "code": "U+00BD" },
+        { "char": "¾", "name": "Three Quarters", "code": "U+00BE" },
+        { "char": "⅓", "name": "One Third", "code": "U+2153" },
+        { "char": "⅔", "name": "Two Thirds", "code": "U+2154" },
+        { "char": "⅛", "name": "One Eighth", "code": "U+215B" },
+        { "char": "⅜", "name": "Three Eighths", "code": "U+215C" },
+        { "char": "⅝", "name": "Five Eighths", "code": "U+215D" },
+        { "char": "⅞", "name": "Seven Eighths", "code": "U+215E" }
+      ]
+    }
+  ]
+}
