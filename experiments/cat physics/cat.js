@@ -55,7 +55,7 @@ function createSoftCat(
   radius = 85,
   fill = "#fab387",
   stroke = "#e69d6c",
-  softness = 0.5
+  softness
 ) {
   softness = clamp(softness, 0, 1);
   
@@ -534,7 +534,7 @@ spawnCat(
   80,
   "#fab387",
   "#e69d6c",
-  0.2
+  0.8
 );
 
 spawnCat(
