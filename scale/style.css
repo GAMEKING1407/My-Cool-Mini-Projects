@@ -1,5 +1,8 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #e9e5d9;
+    background-image: radial-gradient(#d3c5a6 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
 }
 
 .number-container {
@@ -21,4 +24,6 @@ body {
     border-style: solid;
     border-radius: 0.5rem;
     background-color: #ffffff35;
+    border-color: #00000071;
+    padding: 0.5rem;
 }
