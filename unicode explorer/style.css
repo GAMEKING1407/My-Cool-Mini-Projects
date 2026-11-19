@@ -71,7 +71,6 @@ body {
   cursor: pointer;
 }
 
-/* Different sticky note colors */
 .unicode-character:nth-child(4n + 1) {
   --paper: #fff36b;
   --fold: #d9ca4b;
@@ -96,7 +95,6 @@ body {
   transform: rotate(2deg);
 }
 
-/* Paper texture */
 .unicode-character {
   background-image: linear-gradient(
     135deg,
@@ -106,7 +104,6 @@ body {
   );
 }
 
-/* Folded corner */
 .unicode-character::after {
   content: "";
   position: absolute;
@@ -120,7 +117,6 @@ body {
   filter: drop-shadow(-2px -2px 2px #0001);
 }
 
-/* Little tape strip */
 .unicode-character::before {
   content: "";
   position: absolute;
