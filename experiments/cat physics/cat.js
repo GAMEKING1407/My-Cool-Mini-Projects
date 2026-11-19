@@ -18,8 +18,8 @@ engine.gravity.y = 1;
 engine.gravity.scale = 0.001;
 
 engine.constraintIterations = 16;
-engine.positionIterations = 14;
-engine.velocityIterations = 14;
+engine.positionIterations = 16;
+engine.velocityIterations = 10;
 engine.enableSleeping = false;
 
 const world = engine.world;
@@ -49,23 +49,23 @@ Runner.run(runner, engine);
 const clamp = (value, min, max) =>
   Math.max(min, Math.min(max, value));
 
+
 function createSoftCat(
   centerX,
   centerY,
   radius = 85,
   fill = "#fab387",
   stroke = "#e69d6c",
-  softness = 0.5,
-  bounce = 0.65
+  stiffness = 0.5,
+  flow = 0.5
 ) {
-  softness = clamp(softness, 0, 50);
-  bounce = clamp(bounce, 0, 5);
+  stiffness = clamp(stiffness, 0.01, 1);
+  flow = clamp(flow, 0, 1);
 
   const segments = 24;
-  const nodeRadius = Math.max(5, radius * 0.09);
+  const nodeRadius = Math.max(7, radius * 0.14);
 
-  const stiffness = 0.98 - softness * 0.65;
-  const damping = 0.01 + softness * 0.02;
+  const damping = 0.03 + stiffness * 0.12;
 
   const softBody = Composite.create({
     label: "Soft Cat"
@@ -80,11 +80,11 @@ function createSoftCat(
       category: 0x0001,
       mask: 0xFFFFFFFF
     },
-    friction: 0.1,
-    frictionStatic: 0.2,
-    restitution: bounce,
-    frictionAir: 0.001,
-    density: 0.002,
+    friction: 0.05 + flow * 0.5,
+    frictionStatic: 0.1 + stiffness * 0.5,
+    restitution: 0.05 + stiffness * 0.5,
+    frictionAir: 0.002 + flow * 0.008,
+    density: 0.003,
     slop: 0.005,
     render: {
       visible: false
@@ -118,11 +118,9 @@ function createSoftCat(
       Constraint.create({
         bodyA: centerNode,
         bodyB: node,
-        stiffness,
+        stiffness: 0.15 + stiffness * 0.8,
         damping,
-        render: {
-          visible: false
-        }
+        render: { visible: false }
       })
     );
   }
@@ -135,10 +133,10 @@ function createSoftCat(
     const opposite = nodes[(i + 12) % segments];
 
     const constraints = [
-      [current, next, 0.95],
-      [current, skip1, stiffness * 0.9],
-      [current, skip2, stiffness * 0.7],
-      [current, opposite, stiffness * 0.4]
+      [current, next, 0.85 + stiffness * 0.14],
+      [current, skip1, 0.25 + stiffness * 0.65],
+      [current, skip2, 0.1 + stiffness * 0.5],
+      [current, opposite, 0.03 + stiffness * 0.35]
     ];
 
     for (const [bodyA, bodyB, strength] of constraints) {
@@ -149,13 +147,15 @@ function createSoftCat(
           bodyB,
           stiffness: strength,
           damping,
-          render: {
-            visible: false
-          }
+          render: { visible: false }
         })
       );
     }
   }
+
+  const originalArea = radius * radius *
+    Math.sin((Math.PI * 2) / segments) *
+    segments / 2;
 
   return {
     composite: softBody,
@@ -164,10 +164,73 @@ function createSoftCat(
     radius,
     fill,
     stroke,
-    softness,
-    bounce
+    stiffness,
+    flow,
+    originalArea
   };
 }
+
+
+function getPolygonArea(nodes) {
+  let area = 0;
+
+  for (let i = 0; i < nodes.length; i++) {
+    const a = nodes[i].position;
+    const b = nodes[(i + 1) % nodes.length].position;
+
+    area += a.x * b.y - b.x * a.y;
+  }
+
+  return Math.abs(area / 2);
+}
+
+function applyPressure(cat) {
+  const {
+    nodes,
+    originalArea,
+    stiffness,
+    flow
+  } = cat;
+
+  const area = getPolygonArea(nodes);
+
+  const difference = originalArea - area;
+
+  const pressureStrength =
+    0.000015 + stiffness * 0.00006 + flow * 0.000025;
+
+  const pressure = clamp(
+    difference * pressureStrength,
+    -0.0005,
+    0.0005
+  );
+
+  for (let i = 0; i < nodes.length; i++) {
+    const previous = nodes[(i - 1 + nodes.length) % nodes.length];
+    const next = nodes[(i + 1) % nodes.length];
+
+    const dx = next.position.x - previous.position.x;
+    const dy = next.position.y - previous.position.y;
+
+    const length = Math.hypot(dx, dy) || 1;
+
+    const nx = dy / length;
+    const ny = -dx / length;
+
+    Body.applyForce(nodes[i], nodes[i].position, {
+      x: nx * pressure,
+      y: ny * pressure
+    });
+  }
+}
+
+Events.on(engine, "beforeUpdate", () => {
+  for (const cat of cats) {
+    applyPressure(cat);
+  }
+});
+
+
 
 function spawnCat(
   x,
@@ -175,8 +238,8 @@ function spawnCat(
   radius = 85,
   fill = "#fab387",
   stroke = "#e69d6c",
-  softness = 0.5,
-  bounce = 0.65
+  stiffness = 0.5,
+  flow = 0.5
 ) {
   const cat = createSoftCat(
     x,
@@ -184,8 +247,8 @@ function spawnCat(
     radius,
     fill,
     stroke,
-    softness,
-    bounce
+    stiffness,
+    flow
   );
 
   Composite.add(world, cat.composite);
@@ -194,11 +257,11 @@ function spawnCat(
   return cat;
 }
 
+
 const wallOptions = {
   isStatic: true,
-  friction: 0.1,
-  frictionStatic: 0.2,
-  restitution: 1,
+  friction: 0.9,
+  restitution: 0,
   render: {
     visible: false
   }
@@ -503,8 +566,25 @@ function drawCat(cat, ctx) {
 
   ctx.stroke();
 
-  drawCatEar(ctx, nodes, center, 15, 17, fill, stroke);
-  drawCatEar(ctx, nodes, center, 19, 21, fill, stroke);
+  drawCatEar(
+    ctx,
+    nodes,
+    center,
+    15,
+    17,
+    fill,
+    stroke
+  );
+
+  drawCatEar(
+    ctx,
+    nodes,
+    center,
+    19,
+    21,
+    fill,
+    stroke
+  );
 }
 
 Events.on(render, "afterRender", () => {
@@ -521,7 +601,7 @@ const mouseConstraint = MouseConstraint.create(engine, {
   mouse,
   constraint: {
     stiffness: 0.3,
-    damping: 0.05,
+    damping: 0.1,
     render: {
       visible: false
     }
@@ -533,46 +613,34 @@ render.mouse = mouse;
 
 createWalls();
 
+// Stiff rubber
 spawnCat(
-  window.innerWidth * 0.25,
-  100,
-  80,
-  "#fab387",
-  "#e69d6c",
-  0.8,
-  0.8
+  window.innerWidth * 0.2,
+  100, 75,
+  "#fab387", "#e69d6c",
+  0.95, 0.05
 );
 
 spawnCat(
-  window.innerWidth * 0.45,
-  100,
-  70,
-  "#cba6f7",
-  "#a682d6",
-  0.5,
-  0.75
+  window.innerWidth * 0.4,
+  100, 75,
+  "#cba6f7", "#a682d6",
+  0.65, 0.4
 );
 
 spawnCat(
-  window.innerWidth * 0.65,
-  100,
-  85,
-  "#a6e3a1",
-  "#82c27d",
-  0,
-  0.9
+  window.innerWidth * 0.6,
+  100, 75,
+  "#a6e3a1", "#82c27d",
+  0.3, 0.8
 );
 
 spawnCat(
-  window.innerWidth * 0.85,
-  100,
-  65,
-  "#f4e784",
-  "#eedc54",
-  1,
-  4
+  window.innerWidth * 0.8,
+  100, 75,
+  "#f4e784", "#eedc54",
+  0.08, 1
 );
-
 window.addEventListener("resize", () => {
   render.canvas.width = window.innerWidth;
   render.canvas.height = window.innerHeight;
