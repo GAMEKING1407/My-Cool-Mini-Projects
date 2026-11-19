@@ -96,7 +96,8 @@ function createSoftCat(centerX, centerY, radius = 85, fill = "#fab387", stroke =
 const cats = [
   createSoftCat(window.innerWidth * 0.3, 200, 80, "#fab387", "#e69d6c"),
   createSoftCat(window.innerWidth * 0.5, 120, 70, "#cba6f7", "#a682d6"),
-  createSoftCat(window.innerWidth * 0.7, 220, 85, "#a6e3a1", "#82c27d")
+  createSoftCat(window.innerWidth * 0.7, 220, 85, "#a6e3a1", "#82c27d"),
+  createSoftCat(window.innerWidth * 0.7, 220, 85, "#f4e784", "#eedc54")
 ];
 
 const wallOptions = {
