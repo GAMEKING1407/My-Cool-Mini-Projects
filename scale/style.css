@@ -13,10 +13,15 @@ body {
 }
 
 .number-card {
-  background: #ffff004e;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 4px #00000071;
+    background: #ffff004e;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px #00000071;
+    transition: all 0.3s ease-in-out;
+}
+
+.number-card:hover {
+    transform: translateY(-9px) rotate(0deg) scale(1.06);
 }
 
 .number-search {
