@@ -119,7 +119,7 @@ function createWalls() {
     window.innerWidth / 2,
     window.innerHeight - 10,
     window.innerWidth,
-    20,
+    400,
     wallOptions
   );
 
