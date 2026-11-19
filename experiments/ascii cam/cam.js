@@ -40,7 +40,6 @@ function getCharacterColor(r, g, b, brightness, x, y, mode) {
       return `rgb(${r}, ${g}, ${b})`;
 
     case 'rainbow': {
-      // Shift hue across X/Y coordinates and over time
       const hue = (x * 3 + y * 2 + hueOffset) % 360;
       const lightness = Math.max(15, (brightness / 255) * 70);
       return `hsl(${hue}, 100%, ${lightness}%)`;
