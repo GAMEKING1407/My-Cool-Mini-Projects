@@ -177,3 +177,41 @@ body {
     min-height: 135px;
   }
 }
+
+.unicode-search {
+  width: min(100% - 40px, 450px);
+  display: block;
+  margin: 30px auto;
+  padding: 16px 20px;
+
+  background: #fff36b;
+  color: #393522;
+
+  border: none;
+  border-bottom: 3px solid #d9ca4b;
+  border-radius: 2px;
+
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 1rem;
+
+  box-shadow: 4px 6px 10px #0002;
+  transform: rotate(-1deg);
+
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.unicode-search::placeholder {
+  color: #817638;
+  opacity: 0.8;
+}
+
+.unicode-search:focus {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 6px 9px 16px #0003;
+  border-bottom-color: #b9a82e;
+}
+
+.unicode-search:hover {
+  box-shadow: 5px 8px 13px #0003;
+}
