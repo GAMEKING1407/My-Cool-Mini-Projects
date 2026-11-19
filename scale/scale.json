@@ -1,0 +1,42 @@
+{
+    "numbers":
+    {
+        "numbers": [
+            {
+                "id": "million",
+                "name": "One Million",
+                "category": "Large Numbers",
+                "notation": "10<sup>6</sup>",
+                "description": "One thousand thousands."
+            },
+            {
+                "id": "billion",
+                "name": "One Billion",
+                "category": "Large Numbers",
+                "notation": "10<sup>9</sup>",
+                "description": "One thousand million."
+            },
+            {
+                "id": "googol",
+                "name": "Googol",
+                "category": "Exponential Numbers",
+                "notation": "10<sup>100</sup>",
+                "description": "A 1 followed by 100 zeros."
+            },
+            {
+                "id": "googolplex",
+                "name": "Googolplex",
+                "category": "Exponential Numbers",
+                "notation": "10<sup>10<sup>100</sup></sup>",
+                "description": "A 1 followed by a googol zeros."
+            },
+            {
+                "id": "g64",
+                "name": "Graham's Number",
+                "category": "Advanced Mathematics",
+                "notation": "g<sub>64</sub>",
+                "description": "A famously enormous number from Ramsey theory."
+            }
+        ]
+    }
+}
