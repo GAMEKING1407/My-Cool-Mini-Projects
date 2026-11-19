@@ -1,0 +1,37 @@
+    body {
+        margin: 0;
+        background: #0d0d0d;
+        color: #fff;
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .controls {
+        position: fixed;
+        top: 16px;
+        z-index: 10;
+        background: rgba(20, 20, 20, 0.85);
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    select {
+        background: #1a1a1a;
+        color: #fff;
+        border: 1px solid #444;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    canvas {
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+    
