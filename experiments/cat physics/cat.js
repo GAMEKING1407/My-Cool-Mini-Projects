@@ -1,4 +1,3 @@
-
 const {
   Engine,
   Render,
@@ -17,9 +16,9 @@ const engine = Engine.create();
 engine.gravity.y = 1;
 engine.gravity.scale = 0.001;
 
-engine.constraintIterations = 16;
-engine.positionIterations = 16;
-engine.velocityIterations = 10;
+engine.constraintIterations = 12;
+engine.positionIterations = 12;
+engine.velocityIterations = 8;
 engine.enableSleeping = false;
 
 const world = engine.world;
@@ -49,7 +48,6 @@ Runner.run(runner, engine);
 const clamp = (value, min, max) =>
   Math.max(min, Math.min(max, value));
 
-
 function createSoftCat(
   centerX,
   centerY,
@@ -63,12 +61,12 @@ function createSoftCat(
   flow = clamp(flow, 0, 1);
 
   const segments = 24;
-  const nodeRadius = Math.max(7, radius * 0.14);
+  const nodeRadius = Math.max(6, radius * 0.12);
 
-  const damping = 0.03 + stiffness * 0.12;
+  const damping = 0.015 + stiffness * 0.12 + flow * 0.035;
 
   const softBody = Composite.create({
-    label: "Soft Cat"
+    label: "Fluid Cat"
   });
 
   const nodes = [];
@@ -80,12 +78,12 @@ function createSoftCat(
       category: 0x0001,
       mask: 0xFFFFFFFF
     },
-    friction: 0.05 + flow * 0.5,
-    frictionStatic: 0.1 + stiffness * 0.5,
-    restitution: 0.05 + stiffness * 0.5,
-    frictionAir: 0.002 + flow * 0.008,
+    friction: 0.005 + flow * 0.025,
+    frictionStatic: 0.02 + stiffness * 0.15,
+    restitution: 0.02 + stiffness * 0.25,
+    frictionAir: 0.002 + flow * 0.012,
     density: 0.003,
-    slop: 0.005,
+    slop: 0.01,
     render: {
       visible: false
     }
@@ -118,7 +116,7 @@ function createSoftCat(
       Constraint.create({
         bodyA: centerNode,
         bodyB: node,
-        stiffness: 0.15 + stiffness * 0.8,
+        stiffness: 0.025 + stiffness * 0.35,
         damping,
         render: { visible: false }
       })
@@ -133,10 +131,10 @@ function createSoftCat(
     const opposite = nodes[(i + 12) % segments];
 
     const constraints = [
-      [current, next, 0.85 + stiffness * 0.14],
-      [current, skip1, 0.25 + stiffness * 0.65],
-      [current, skip2, 0.1 + stiffness * 0.5],
-      [current, opposite, 0.03 + stiffness * 0.35]
+      [current, next, 0.06 + stiffness * 0.75],
+      [current, skip1, 0.01 + stiffness * 0.35],
+      [current, skip2, 0.005 + stiffness * 0.2],
+      [current, opposite, 0.002 + stiffness * 0.1]
     ];
 
     for (const [bodyA, bodyB, strength] of constraints) {
@@ -153,7 +151,8 @@ function createSoftCat(
     }
   }
 
-  const originalArea = radius * radius *
+  const originalArea =
+    radius * radius *
     Math.sin((Math.PI * 2) / segments) *
     segments / 2;
 
@@ -169,7 +168,6 @@ function createSoftCat(
     originalArea
   };
 }
-
 
 function getPolygonArea(nodes) {
   let area = 0;
@@ -194,15 +192,19 @@ function applyPressure(cat) {
 
   const area = getPolygonArea(nodes);
 
-  const difference = originalArea - area;
+  if (area < 1) return;
+
+  const areaDifference = (originalArea - area) / originalArea;
 
   const pressureStrength =
-    0.000015 + stiffness * 0.00006 + flow * 0.000025;
+    0.00015 +
+    stiffness * 0.0005 +
+    flow * 0.0002;
 
   const pressure = clamp(
-    difference * pressureStrength,
-    -0.0005,
-    0.0005
+    areaDifference * pressureStrength,
+    -0.0008,
+    0.0008
   );
 
   for (let i = 0; i < nodes.length; i++) {
@@ -217,9 +219,17 @@ function applyPressure(cat) {
     const nx = dy / length;
     const ny = -dx / length;
 
+    const edgeLength =
+      Math.hypot(
+        nodes[(i + 1) % nodes.length].position.x - nodes[i].position.x,
+        nodes[(i + 1) % nodes.length].position.y - nodes[i].position.y
+      );
+
+    const force = pressure * edgeLength / (cat.radius / 10);
+
     Body.applyForce(nodes[i], nodes[i].position, {
-      x: nx * pressure,
-      y: ny * pressure
+      x: nx * force,
+      y: ny * force
     });
   }
 }
@@ -229,8 +239,6 @@ Events.on(engine, "beforeUpdate", () => {
     applyPressure(cat);
   }
 });
-
-
 
 function spawnCat(
   x,
@@ -257,10 +265,9 @@ function spawnCat(
   return cat;
 }
 
-
 const wallOptions = {
   isStatic: true,
-  friction: 0.9,
+  friction: 0.05,
   restitution: 0,
   render: {
     visible: false
@@ -462,42 +469,16 @@ function drawCat(cat, ctx) {
   ctx.fillStyle = "#1e1e2e";
   ctx.beginPath();
 
-  ctx.arc(
-    leftEye.x,
-    leftEye.y,
-    8 * scaleFactor,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.arc(
-    rightEye.x,
-    rightEye.y,
-    8 * scaleFactor,
-    0,
-    Math.PI * 2
-  );
+  ctx.arc(leftEye.x, leftEye.y, 8 * scaleFactor, 0, Math.PI * 2);
+  ctx.arc(rightEye.x, rightEye.y, 8 * scaleFactor, 0, Math.PI * 2);
 
   ctx.fill();
 
   ctx.fillStyle = "#ffffff";
   ctx.beginPath();
 
-  ctx.arc(
-    leftHighlight.x,
-    leftHighlight.y,
-    3 * scaleFactor,
-    0,
-    Math.PI * 2
-  );
-
-  ctx.arc(
-    rightHighlight.x,
-    rightHighlight.y,
-    3 * scaleFactor,
-    0,
-    Math.PI * 2
-  );
+  ctx.arc(leftHighlight.x, leftHighlight.y, 3 * scaleFactor, 0, Math.PI * 2);
+  ctx.arc(rightHighlight.x, rightHighlight.y, 3 * scaleFactor, 0, Math.PI * 2);
 
   ctx.fill();
 
@@ -566,25 +547,8 @@ function drawCat(cat, ctx) {
 
   ctx.stroke();
 
-  drawCatEar(
-    ctx,
-    nodes,
-    center,
-    15,
-    17,
-    fill,
-    stroke
-  );
-
-  drawCatEar(
-    ctx,
-    nodes,
-    center,
-    19,
-    21,
-    fill,
-    stroke
-  );
+  drawCatEar(ctx, nodes, center, 15, 17, fill, stroke);
+  drawCatEar(ctx, nodes, center, 19, 21, fill, stroke);
 }
 
 Events.on(render, "afterRender", () => {
@@ -600,8 +564,8 @@ const mouse = Mouse.create(render.canvas);
 const mouseConstraint = MouseConstraint.create(engine, {
   mouse,
   constraint: {
-    stiffness: 0.3,
-    damping: 0.1,
+    stiffness: 0.12,
+    damping: 0.08,
     render: {
       visible: false
     }
@@ -613,34 +577,46 @@ render.mouse = mouse;
 
 createWalls();
 
-// Stiff rubber
 spawnCat(
   window.innerWidth * 0.2,
-  100, 75,
-  "#fab387", "#e69d6c",
-  0.95, 0.05
+  100,
+  75,
+  "#fab387",
+  "#e69d6c",
+  0.95,
+  0.05
 );
 
 spawnCat(
   window.innerWidth * 0.4,
-  100, 75,
-  "#cba6f7", "#a682d6",
-  0.65, 0.4
+  100,
+  75,
+  "#cba6f7",
+  "#a682d6",
+  0.5,
+  0.65
 );
 
 spawnCat(
   window.innerWidth * 0.6,
-  100, 75,
-  "#a6e3a1", "#82c27d",
-  0.3, 0.8
+  100,
+  75,
+  "#a6e3a1",
+  "#82c27d",
+  0.15,
+  0.9
 );
 
 spawnCat(
   window.innerWidth * 0.8,
-  100, 75,
-  "#f4e784", "#eedc54",
-  0.08, 1
+  100,
+  75,
+  "#f4e784",
+  "#eedc54",
+  0.01,
+  1
 );
+
 window.addEventListener("resize", () => {
   render.canvas.width = window.innerWidth;
   render.canvas.height = window.innerHeight;
