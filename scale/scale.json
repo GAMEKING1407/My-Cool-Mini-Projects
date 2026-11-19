@@ -1,6 +1,5 @@
 {
-    "numbers":
-    {
+    "numbers": {
         "numbers": [
             {
                 "id": "million",
@@ -31,11 +30,60 @@
                 "description": "A 1 followed by a googol zeros."
             },
             {
+                "id": "goobol",
+                "name": "Goobol",
+                "category": "Advanced Mathematics",
+                "notation": "{10, 100(1)2}",
+                "description": "A linear array of one hundred 10s in Bowers' Exploding Array Function."
+            },
+            {
                 "id": "g64",
                 "name": "Graham's Number",
                 "category": "Advanced Mathematics",
                 "notation": "g<sub>64</sub>",
                 "description": "A famously enormous number from Ramsey theory."
+            },
+            {
+                "id": "tree3",
+                "name": "Tree 3",
+                "category": "Advanced Mathematics",
+                "notation": "TREE(3)",
+                "description": "Makes Graham's Number effectively 0."
+            },
+            {
+                "id": "sscg3",
+                "name": "SSCG(3)",
+                "category": "Advanced Mathematics",
+                "notation": "SSCG(3)",
+                "description": "So vast that it dwarfs TREE(3) nested inside itself TREE(3) times."
+            },
+            {
+                "id": "busy beavers",
+                "name": "Busy Beaver Numbers",
+                "category": "The Death of Sanity",
+                "notation": "&Sigma;(n)",
+                "description": "An uncomputable, fast-growing function where &Sigma;(6) already exceeds Graham's Number."
+            },
+            {
+                "id": "rayo",
+                "name": "Rayo's Number",
+                "category": "The Death of Sanity",
+                "notation": "Rayo(10<sup>100</sup>)",
+                "description": "The smallest number bigger than any finite number named by an expression in first-order set theory with a googol symbols or less."
+            },
+            {
+                "id": "fish number 7",
+                "name": "Fish Number 7",
+                "category": "The Death of Sanity",
+                "notation": "F<sub>7</sub>",
+                "description": "Just no..."
+            },
+            {
+                "id": "large number garden number",
+                "name": "Large Number Garden Number",
+                "category": "The Death of Sanity",
+                "notation": "<i>f</i><sup>10</sup>(10 &uarr;<sup>10</sup> 10)",
+                "description": "Largest defined number"
             }
         ]
     }

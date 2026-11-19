@@ -1,7 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #e9e5d9;
-    background-image: radial-gradient(#d3c5a6 0.8px, transparent 0.8px);
+    background-color: #7ba577;
+    background-image: radial-gradient(#87bd6e 0.8px, transparent 0.8px);
     background-size: 18px 18px;
 }
 
@@ -13,7 +13,7 @@ body {
 }
 
 .number-card {
-    background: #ffff004e;
+    background: #36c2644e;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 4px #00000071;
@@ -35,7 +35,5 @@ body {
 
 header {
     color: #252b3c;
-    background-color: #ffffff35;
-    border-color: #00000071;
     padding: 0.5rem;
 }
