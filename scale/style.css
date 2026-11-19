@@ -13,7 +13,7 @@ body {
 }
 
 .number-card {
-  background: linear-gradient(to right, #abd3f6, #96c7f2);
+  background: #ffff004e;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 4px #00000071;
@@ -23,6 +23,13 @@ body {
     color: #252b3c;
     border-style: solid;
     border-radius: 0.5rem;
+    background-color: #ffffff35;
+    border-color: #00000071;
+    padding: 0.5rem;
+}
+
+header {
+    color: #252b3c;
     background-color: #ffffff35;
     border-color: #00000071;
     padding: 0.5rem;
