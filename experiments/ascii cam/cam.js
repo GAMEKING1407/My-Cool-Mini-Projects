@@ -6,7 +6,7 @@ const video = document.createElement('video');
 const sampleCanvas = document.createElement('canvas');
 const sampleCtx = sampleCanvas.getContext('2d', { willReadFrequently: true });
 
-const density = " .:-=+*#%@";
+const density = " .'`^\",:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
 const cols = 120;
 const rows = 75;
@@ -68,7 +68,6 @@ function renderFrame() {
   const pixels = sampleCtx.getImageData(0, 0, cols, rows).data;
   const mode = colorModeSelect.value;
 
-  // Clear previous frame
   displayCtx.fillStyle = '#0d0d0d';
   displayCtx.fillRect(0, 0, displayCanvas.width, displayCanvas.height);
 
